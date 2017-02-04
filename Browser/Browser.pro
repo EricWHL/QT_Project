@@ -1,6 +1,6 @@
 QT       += core gui webkitwidgets widgets
 
-TARGET = demo
+TARGET = Browser
 TEMPLATE = app
 
 

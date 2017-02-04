@@ -5,7 +5,7 @@ TabPage::TabPage(QWidget *parent) :
     QTabWidget(parent)
 {
     // Set property
-    this->setTabsClosable(true);
+    this->setTabsClosable(true);    
 
     // Connect built-in signal to customized one
     connect(this, SIGNAL(currentChanged(int)), SLOT(handleTabChanged(int)));
@@ -22,21 +22,42 @@ TabPage::~TabPage()
 void TabPage::handleNewTab()
 {
     HtmlView *view = new HtmlView;
-    view->load(QUrl("https://www.baidu.com"));
-    //view->page()->setForwardUnsupportedContent(true);
-    view->page()->setLinkDelegationPolicy(QWebPage::DelegateAllLinks);
 
-    // Monitor linkClicked signal    
-    connect(view, SIGNAL(linkClicked(const QUrl&)), this, SLOT(handleLinkClicked(const QUrl&)));
-    connect(view, SIGNAL(titleChanged(QString)), this, SLOT(handleTitleChanged(QString)));
+    if(-1 ==  this->currentIndex()) {
+        view->load(QUrl("https://www.baidu.com"));
+        //view->page()->setForwardUnsupportedContent(true);`
+        view->page()->setLinkDelegationPolicy(QWebPage::DelegateAllLinks);
 
-    // Add and activate this new tab
-    int index = this->addTab(view, "Welcome");
-    this->setCurrentIndex(index);
+        // Monitor linkClicked signal
+        connect(view, SIGNAL(linkClicked(const QUrl&)), this, SLOT(handleLinkClicked(const QUrl&)));
+        connect(view, SIGNAL(titleChanged(QString)), this, SLOT(handleTitleChanged(QString)));
 
-    viewList.append(view);
+        // Add and activate this new tab
+        int index = this->addTab(view, "");
+        this->setCurrentIndex(index);
 
-    emit urlChanged(QUrl(""));
+        viewList.append(view);
+
+        emit urlChanged(QUrl(""));
+    }
+    else {
+        view->load(QUrl(""));
+        //view->page()->setForwardUnsupportedContent(true);
+        view->page()->setLinkDelegationPolicy(QWebPage::DelegateAllLinks);
+
+        // Monitor linkClicked signal
+        connect(view, SIGNAL(linkClicked(const QUrl&)), this, SLOT(handleLinkClicked(const QUrl&)));
+        connect(view, SIGNAL(titleChanged(QString)), this, SLOT(handleTitleChanged(QString)));
+
+        // Add and activate this new tab
+        int index = this->addTab(view, "New");
+        this->setCurrentIndex(index);
+
+        viewList.append(view);
+
+        emit urlChanged(QUrl(""));
+    }
+
 }
 
 void TabPage::handleLoadNewPage(const QUrl &url)
