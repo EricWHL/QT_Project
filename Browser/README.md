@@ -1,2 +1,2 @@
-# qtbrowser
-A Qt browser demo.
+# QT Browser
+A Qt Browser Tool
