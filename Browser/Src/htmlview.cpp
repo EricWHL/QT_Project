@@ -1,4 +1,4 @@
-#include "htmlview.h"
+#include "Inc\htmlview.h"
 
 HtmlView::HtmlView(QWidget *parent) :
     QWebView(parent)

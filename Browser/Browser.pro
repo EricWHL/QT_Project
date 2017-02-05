@@ -1,17 +1,19 @@
 QT       += core gui webkitwidgets widgets
 
+
 TARGET = Browser
 TEMPLATE = app
 
 
-SOURCES += main.cpp\
-        mainwindow.cpp \
-    htmlview.cpp \
-    addressbar.cpp \
-    tabpage.cpp
+SOURCES += \
+    Src/addressbar.cpp \
+    Src/htmlview.cpp \
+    Src/main.cpp \
+    Src/mainwindow.cpp \
+    Src/tabpage.cpp
 
-HEADERS  += mainwindow.h \
-    htmlview.h \
-    addressbar.h \
-    tabpage.h
-
+HEADERS  +=  \
+    Inc/addressbar.h \
+    Inc/htmlview.h \
+    Inc/mainwindow.h \
+    Inc/tabpage.h

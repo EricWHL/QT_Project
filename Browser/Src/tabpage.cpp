@@ -1,4 +1,4 @@
-#include "tabpage.h"
+#include "Inc\tabpage.h"
 #include <QtDebug>
 
 TabPage::TabPage(QWidget *parent) :
